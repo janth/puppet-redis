@@ -20,7 +20,7 @@ Facter.add(:initsystem) do
     end
 end
 
-Facter.add(':initdaemon') do
+Facter.add(:initdaemon) do
   setcode do
     Facter.value(:initsystem)
   end
