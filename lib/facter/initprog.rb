@@ -1,4 +1,4 @@
-#
+# vim:expandtab,sw=2
 
 require 'facter'
 
@@ -14,14 +14,14 @@ Facter.add(:initsystem) do
       f = nil
       f = File.readlink("/proc/10480/exe")
       f = File.basename(f)
-			f
-		rescue
-			nil
-		end
+      f
+    rescue
+      nil
+    end
 end
 
 Facter.add(':initdaemon') do
-	setcode do
-		Facter.value(:initsystem)
-	end
+  setcode do
+    Facter.value(:initsystem)
+  end
 end
