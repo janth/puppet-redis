@@ -14,11 +14,10 @@ Facter.add(:initsystem) do
       f = nil
       f = File.readlink("/proc/10480/exe")
       f = File.basename(f)
-    end
-    f
-  rescue
-    nil
-  end
+			f
+		rescue
+			nil
+		end
 end
 
 Facter.add(':initdaemon') do
