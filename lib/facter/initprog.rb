@@ -4,7 +4,7 @@ require 'facter'
 
 Facter.add(:initsystem) do
   #confine = :osfamily => :windows
-  confine = :kernel => %w[Linux]
+  confine kernel: %w[Linux]
   
   # Do not assume anything based on ::operatingsystemmajrelease
   # as for instance https://github.com/hfm/puppet-initsystem/blob/master/lib/facter/initsystem.rb does...
