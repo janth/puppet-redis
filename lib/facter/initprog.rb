@@ -18,6 +18,7 @@ Facter.add(:initsystem) do
     rescue
       nil
     end
+  end
 end
 
 Facter.add(:initdaemon) do
