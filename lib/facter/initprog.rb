@@ -1,5 +1,8 @@
 # vim:expandtab,sw=2
 
+# check syntax:
+# /opt/puppetlabs/puppet/bin/ruby -c lib/facter/initprog.rb
+
 require 'facter'
 
 Facter.add(:initsystem) do
@@ -12,7 +15,7 @@ Facter.add(:initsystem) do
   setcode do
     begin
       f = nil
-      f = File.readlink("/proc/10480/exe")
+      f = File.readlink("/proc/1/exe")
       f = File.basename(f)
       f
     rescue
