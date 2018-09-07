@@ -67,6 +67,8 @@
 #   Configure Redis slave to server stale data
 # [*slave_read_only*]
 #   Configure Redis slave to be in read-only mode
+# [*slave_priority*]
+#   Configure Redis slave priority. Default: undef
 # [*repl_timeout*]
 #   Configure Redis slave replication timeout
 # [*repl_ping_slave_period*]
@@ -156,6 +158,7 @@ define redis::server (
   $masterauth                    = undef,
   $slave_serve_stale_data        = true,
   $slave_read_only               = true,
+  $slave_priority                = undef,
   $repl_timeout                  = 60,
   $repl_ping_slave_period        = 10,
   $repl_backlog_size             = undef,
@@ -205,16 +208,12 @@ define redis::server (
         $service_file = "/usr/lib/systemd/system/redis-server_${redis_name}.service"
       }
     }
-    'Debian': {
-      if versioncmp($::operatingsystemmajrelease, '8') >= 0 {
+    'Debian', 'Ubuntu': {
+      if versioncmp($::init_system, 'systemd') >= 0 {
         $has_systemd = true
         $service_file = "/etc/systemd/system/redis-server_${redis_name}.service"
-      }
-    }
-    'Ubuntu': {
-      if versioncmp($::operatingsystemmajrelease, '15.04') >= 0 {
-        $has_systemd = true
-        $service_file = "/etc/systemd/system/redis-server_${redis_name}.service"
+      } else {
+        $has_systemd = false
       }
     }
     default:  {
